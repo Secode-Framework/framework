@@ -1,0 +1,110 @@
+<?php
+
+namespace Secode\Component;
+
+use JsonSerializable;
+use stdClass;
+
+class JsonResponseContent implements JsonSerializable
+{
+    private string $message;
+    private bool $success;
+    private stdClass $error;
+    private bool $logout = false;
+
+    /**
+     * @return string
+     */
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return JsonResponseContent
+     */
+    public function setMessage(string $message): JsonResponseContent
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(): bool
+    {
+        return $this->success;
+    }
+
+    /**
+     * @param bool $success
+     *
+     * @return JsonResponseContent
+     */
+    public function setSuccess(bool $success): JsonResponseContent
+    {
+        $this->success = $success;
+        return $this;
+    }
+
+    /**
+     * @return stdClass
+     */
+    public function getError(): stdClass
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param stdClass $error
+     *
+     * @return JsonResponseContent
+     */
+    public function setError(stdClass $error): JsonResponseContent
+    {
+        $this->error = $error;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLogout(): bool
+    {
+        return $this->logout;
+    }
+
+    /**
+     * @param bool $logout
+     *
+     * @return JsonResponseContent
+     */
+    public function setLogout(bool $logout): JsonResponseContent
+    {
+        $this->logout = $logout;
+        return $this;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return json_encode($this->getDataArray());
+    }
+
+    public function getDataArray(): array
+    {
+        $arrayToReturn = [
+            'success' => $this->success,
+            'message' => $this->message,
+        ];
+
+        if ($this->success === false) {
+            $arrayToReturn['error'] = (object)$this->error;
+            $arrayToReturn['logout'] = (object)$this->logout;
+        }
+
+        return $arrayToReturn;
+    }
+}

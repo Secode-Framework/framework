@@ -1,0 +1,11 @@
+{
+    "success": false,
+    "message": "Ha ocurrido un error inesperado",
+    "error": {
+        "param1": "Mensaje error param1",
+        "param2": "Mensaje error param2",
+        "param3": "Mensaje error param3",
+        "param4": "Mensaje error param4"
+    },
+    "logout": false
+}
