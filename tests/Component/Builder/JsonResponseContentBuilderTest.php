@@ -12,16 +12,30 @@ class JsonResponseContentBuilderTest extends TestCase
     const  ERROR_MESSAGE = "Mensaje de error";
     const  SUCCESS_MESSAGE = "Mensaje de success";
 
-    public function testWhenBuildErrorExpectSuccessFalse()
+    public function testWhenBuildErrorWithDataExpectSuccessFalse()
     {
-        $jsonResponseContent = JsonResponseContentBuilder::buildError(new stdClass(), self::ERROR_MESSAGE);
+        $jsonResponseContent = JsonResponseContentBuilder::buildErrorWithData(new stdClass(), self::ERROR_MESSAGE);
 
         $this->assertFalse($jsonResponseContent->isSuccess());
     }
 
+    public function testWhenBuildErrorExpectSuccessFalse()
+    {
+        $jsonResponseContent = JsonResponseContentBuilder::buildError(self::ERROR_MESSAGE);
+
+        $this->assertFalse($jsonResponseContent->isSuccess());
+    }
+
+    public function testWhenBuildSuccessWithDataExpectSuccessTrue()
+    {
+        $jsonResponseContent = JsonResponseContentBuilder::buildSuccessWithData(new stdClass(),self::SUCCESS_MESSAGE);
+
+        $this->assertTrue($jsonResponseContent->isSuccess());
+    }
+
     public function testWhenBuildSuccessExpectSuccessTrue()
     {
-        $jsonResponseContent = JsonResponseContentBuilder::buildSuccess(new stdClass(),self::SUCCESS_MESSAGE);
+        $jsonResponseContent = JsonResponseContentBuilder::buildSuccess(self::SUCCESS_MESSAGE);
 
         $this->assertTrue($jsonResponseContent->isSuccess());
     }

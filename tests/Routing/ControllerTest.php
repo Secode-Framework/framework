@@ -13,22 +13,41 @@ class ControllerTest extends TestCase
     const MESSAGE_ERROR = "Ha ocurrido un error inesperado";
     const MESSAGE_SUCCESSFUL = "Todo ha ido correctamente";
 
-    public function testWhenThrowErrorExpectResultJsonSerialized()
+    public function testWhenSendDataFailExpectResultJsonSerialized()
     {
         $error = JsonReader::get("Routing/ControllerTest/error.json", stdClass::class);
         $expectedJsonResponse = JsonReader::get("Routing/ControllerTest/expectedJsonResponse.json", JsonResponseContent::class);
 
-        $jsonResponse = (new Controller())->throwError($error, self::MESSAGE_ERROR);
+        $jsonResponse = (new Controller())->sendDataFail($error, self::MESSAGE_ERROR);
+
+        $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
+    }
+
+    public function testWhenSendDataSuccessfulExpectResultJsonSerialized()
+    {
+        $expectedJsonResponse = JsonReader::get("Routing/ControllerTest/expectedJsonResponseTwo.json", JsonResponseContent::class);
+
+        $jsonResponse = (new Controller())->sendDataSuccessful(new stdClass(),self::MESSAGE_SUCCESSFUL);
 
         $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
     }
 
     public function testWhenSendMessageSuccessfulExpectResultJsonSerialized()
     {
-        $expectedJsonResponse = JsonReader::get("Routing/ControllerTest/expectedJsonResponseTwo.json", JsonResponseContent::class);
+        $expectedJsonResponse = JsonReader::get("Routing/ControllerTest/expectedJsonResponseThree.json", JsonResponseContent::class);
 
-        $jsonResponse = (new Controller())->sendMessageSuccessful(new stdClass(),self::MESSAGE_SUCCESSFUL);
+        $jsonResponse = (new Controller())->sendMessageSuccessful(self::MESSAGE_SUCCESSFUL);
 
         $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
     }
+
+    public function testWhenSendMessageFailExpectResultJsonSerialized()
+    {
+        $expectedJsonResponse = JsonReader::get("Routing/ControllerTest/expectedJsonResponseFour.json", JsonResponseContent::class);
+
+        $jsonResponse = (new Controller())->sendMessageFail(self::MESSAGE_ERROR);
+
+        $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
+    }
+
 }

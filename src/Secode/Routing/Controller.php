@@ -13,14 +13,24 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function throwError($error, $message): JsonResponse
+    public function sendDataFail($error, $message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildError($error, $message));
+        return new JsonResponse(JsonResponseContentBuilder::buildErrorWithData($error, $message));
     }
 
-    public function sendMessageSuccessful($data, $message): JsonResponse
+    public function sendMessageFail($message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildSuccess($data, $message));
+        return new JsonResponse(JsonResponseContentBuilder::buildError($message));
+    }
+
+    public function sendMessageSuccessful($message): JsonResponse
+    {
+        return new JsonResponse(JsonResponseContentBuilder::buildSuccess($message));
+    }
+
+    public function sendDataSuccessful($data, $message): JsonResponse
+    {
+        return new JsonResponse(JsonResponseContentBuilder::buildSuccessWithData($data, $message));
     }
 
 }

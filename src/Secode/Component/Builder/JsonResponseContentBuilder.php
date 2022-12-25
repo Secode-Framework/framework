@@ -7,7 +7,8 @@ use stdClass;
 
 class JsonResponseContentBuilder
 {
-    public static function buildError(stdClass $error, string $message = ''): JsonResponseContent
+
+    public static function buildErrorWithData(stdClass $error, string $message = ''): JsonResponseContent
     {
         return (new JsonResponseContent())
             ->setError($error)
@@ -15,11 +16,27 @@ class JsonResponseContentBuilder
             ->setSuccess(false);
     }
 
-    public static function buildSuccess(stdClass $data, string $message = ''): JsonResponseContent
+    public static function buildError(string $message = ''): JsonResponseContent
+    {
+        return (new JsonResponseContent())
+            ->setMessage($message)
+            ->setError(new stdClass())
+            ->setSuccess(false);
+    }
+
+    public static function buildSuccessWithData(stdClass $data, string $message = ''): JsonResponseContent
     {
         return (new JsonResponseContent())
             ->setMessage($message)
             ->setData($data)
+            ->setSuccess(true);
+    }
+
+    public static function buildSuccess(string $message = ''): JsonResponseContent
+    {
+        return (new JsonResponseContent())
+            ->setMessage($message)
+            ->setData(new stdClass())
             ->setSuccess(true);
     }
 }
