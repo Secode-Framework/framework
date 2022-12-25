@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Secode\Component\Builder\JsonResponseContentBuilder;
+use Secode\Component\JsonResponseContent;
 
 class Controller extends BaseController
 {
@@ -15,22 +16,29 @@ class Controller extends BaseController
 
     public function sendDataFail($error, $message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildErrorWithData($error, $message));
+        return $this->getJsonResponseFromJsonResponseContent(
+            JsonResponseContentBuilder::buildErrorWithData($error, $message));
+    }
+
+    private function getJsonResponseFromJsonResponseContent(JsonResponseContent $jsonResponseContent): JsonResponse
+    {
+        return new JsonResponse($jsonResponseContent->getDataArray());
     }
 
     public function sendMessageFail($message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildError($message));
+        return $this->getJsonResponseFromJsonResponseContent(JsonResponseContentBuilder::buildError($message));
     }
 
     public function sendMessageSuccessful($message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildSuccess($message));
+        return $this->getJsonResponseFromJsonResponseContent(JsonResponseContentBuilder::buildSuccess($message));
     }
 
     public function sendDataSuccessful($data, $message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildSuccessWithData($data, $message));
+        return $this->getJsonResponseFromJsonResponseContent(
+            JsonResponseContentBuilder::buildSuccessWithData($data, $message));
     }
 
 }

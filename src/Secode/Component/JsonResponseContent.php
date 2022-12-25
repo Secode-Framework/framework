@@ -2,10 +2,9 @@
 
 namespace Secode\Component;
 
-use JsonSerializable;
 use stdClass;
 
-class JsonResponseContent implements JsonSerializable
+class JsonResponseContent
 {
     private string $message;
     private bool $success;

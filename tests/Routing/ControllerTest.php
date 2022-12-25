@@ -20,7 +20,7 @@ class ControllerTest extends TestCase
 
         $jsonResponse = (new Controller())->sendDataFail($error, self::MESSAGE_ERROR);
 
-        $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
+        $this->assertEquals($expectedJsonResponse->jsonSerialize(), $jsonResponse->content());
     }
 
     public function testWhenSendDataSuccessfulExpectResultJsonSerialized()
@@ -29,7 +29,7 @@ class ControllerTest extends TestCase
 
         $jsonResponse = (new Controller())->sendDataSuccessful(new stdClass(),self::MESSAGE_SUCCESSFUL);
 
-        $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
+        $this->assertEquals($expectedJsonResponse->jsonSerialize(), ($jsonResponse->content()));
     }
 
     public function testWhenSendMessageSuccessfulExpectResultJsonSerialized()
@@ -38,7 +38,7 @@ class ControllerTest extends TestCase
 
         $jsonResponse = (new Controller())->sendMessageSuccessful(self::MESSAGE_SUCCESSFUL);
 
-        $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
+        $this->assertEquals($expectedJsonResponse->jsonSerialize(), ($jsonResponse->content()));
     }
 
     public function testWhenSendMessageFailExpectResultJsonSerialized()
@@ -47,7 +47,7 @@ class ControllerTest extends TestCase
 
         $jsonResponse = (new Controller())->sendMessageFail(self::MESSAGE_ERROR);
 
-        $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
+        $this->assertEquals($expectedJsonResponse->jsonSerialize(), ($jsonResponse->content()));
     }
 
 }
