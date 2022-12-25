@@ -27,7 +27,7 @@ class ControllerTest extends TestCase
     {
         $expectedJsonResponse = JsonReader::get("Routing/ControllerTest/expectedJsonResponseTwo.json", JsonResponseContent::class);
 
-        $jsonResponse = (new Controller())->sendMessageSuccessful(self::MESSAGE_SUCCESSFUL);
+        $jsonResponse = (new Controller())->sendMessageSuccessful(new stdClass(),self::MESSAGE_SUCCESSFUL);
 
         $this->assertEquals($expectedJsonResponse->jsonSerialize(), json_decode($jsonResponse->content()));
     }

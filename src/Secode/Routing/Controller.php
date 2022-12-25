@@ -18,9 +18,9 @@ class Controller extends BaseController
         return new JsonResponse(JsonResponseContentBuilder::buildError($error, $message));
     }
 
-    public function sendMessageSuccessful($message): JsonResponse
+    public function sendMessageSuccessful($data, $message): JsonResponse
     {
-        return new JsonResponse(JsonResponseContentBuilder::buildSuccess($message));
+        return new JsonResponse(JsonResponseContentBuilder::buildSuccess($data, $message));
     }
 
 }

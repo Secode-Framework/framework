@@ -15,10 +15,11 @@ class JsonResponseContentBuilder
             ->setSuccess(false);
     }
 
-    public static function buildSuccess(string $message = ''): JsonResponseContent
+    public static function buildSuccess(stdClass $data, string $message = ''): JsonResponseContent
     {
         return (new JsonResponseContent())
             ->setMessage($message)
+            ->setData($data)
             ->setSuccess(true);
     }
 }
