@@ -21,7 +21,7 @@ class JsonResponseContentBuilderTest extends TestCase
 
     public function testWhenBuildSuccessExpectSuccessTrue()
     {
-        $jsonResponseContent = JsonResponseContentBuilder::buildSuccess(self::SUCCESS_MESSAGE);
+        $jsonResponseContent = JsonResponseContentBuilder::buildSuccess(new stdClass(),self::SUCCESS_MESSAGE);
 
         $this->assertTrue($jsonResponseContent->isSuccess());
     }

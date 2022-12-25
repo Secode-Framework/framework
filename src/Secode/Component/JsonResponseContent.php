@@ -10,6 +10,7 @@ class JsonResponseContent implements JsonSerializable
     private string $message;
     private bool $success;
     private stdClass $error;
+    private stdClass $data;
     private bool $logout = false;
 
     /**
@@ -88,7 +89,26 @@ class JsonResponseContent implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return stdClass
+     */
+    public function getData(): stdClass
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param stdClass $data
+     *
+     * @return JsonResponseContent
+     */
+    public function setData(stdClass $data): JsonResponseContent
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    public function jsonSerialize(): string|bool
     {
         return json_encode($this->getDataArray());
     }
@@ -101,8 +121,10 @@ class JsonResponseContent implements JsonSerializable
         ];
 
         if ($this->success === false) {
-            $arrayToReturn['error'] = (object)$this->error;
-            $arrayToReturn['logout'] = (object)$this->logout;
+            $arrayToReturn['error'] = $this->error;
+            $arrayToReturn['logout'] = $this->logout;
+        } else {
+            $arrayToReturn['data'] = $this->data;
         }
 
         return $arrayToReturn;
