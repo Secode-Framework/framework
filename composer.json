@@ -1,12 +1,12 @@
 {
-    "name": "secode/secode",
+    "name": "secode-framework/framework",
     "description": "The Secode Framework.",
     "keywords": ["framework", "laravel","secode"],
     "license": "MIT",
     "homepage": "https://www.secode.com",
     "support": {
-        "issues": "https://github.com/laravel/framework/issues",
-        "source": "https://github.com/laravel/framework"
+        "issues": "https://github.com/Secode-Framework/framework/issues",
+        "source": "https://github.com/Secode-Framework/framework"
     },
     "authors": [
         {
