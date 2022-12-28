@@ -112,7 +112,7 @@ class Application extends ApplicationParent
 
         foreach ((array)data_get($composer, 'autoload.psr-4') as $namespace => $path) {
             foreach ((array)$path as $pathChoice) {
-                if (realpath($this->path()) === realpath($this->basePath($pathChoice))) {
+                if (realpath($this->path()) === realpath($this->publicPath($pathChoice))) {
                     return $this->namespace = $namespace;
                 }
             }
