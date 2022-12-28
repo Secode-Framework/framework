@@ -76,21 +76,23 @@ class RouteServiceProvider extends ServiceProvider
 
     public function setEndpoints($endpoints)
     {
-        foreach ($endpoints as $keyEndpoint => $endpointValue) {
-            $method = $endpointValue['method'];
-            $action = $endpointValue['action'];
-            $middlewares = $endpointValue['middlewares'] ?? [];
+        foreach ($endpoints as $keyEndpoint => $endpointValues) {
+            foreach ($endpointValues as $endpointValue) {
+                $method = $endpointValue['method'];
+                $action = $endpointValue['action'];
+                $middlewares = $endpointValue['middlewares'] ?? [];
 
-            $route = match ($method) {
-                'post' => Route::post($keyEndpoint, $action),
-                'get' => Route::get($keyEndpoint, $action),
-                'put' => Route::put($keyEndpoint, $action),
-                'delete' => Route::delete($keyEndpoint, $action),
-                default => null /* Throw exception */,
-            };
+                $route = match ($method) {
+                    'post' => Route::post($keyEndpoint, $action),
+                    'get' => Route::get($keyEndpoint, $action),
+                    'put' => Route::put($keyEndpoint, $action),
+                    'delete' => Route::delete($keyEndpoint, $action),
+                    default => null /* Throw exception */,
+                };
 
-            if (!empty($middlewares)) {
-                $route->middleware($middlewares);
+                if (!empty($middlewares)) {
+                    $route->middleware($middlewares);
+                }
             }
         }
     }
