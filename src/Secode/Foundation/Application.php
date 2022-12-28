@@ -96,13 +96,39 @@ class Application extends ApplicationParent
     }
 
     /**
+     * Get the application namespace.
+     *
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    public function getNamespace()
+    {
+        if (!is_null($this->namespace)) {
+            return $this->namespace;
+        }
+
+        $composer = json_decode(file_get_contents($this->publicPath('composer.json')), true);
+
+        foreach ((array)data_get($composer, 'autoload.psr-4') as $namespace => $path) {
+            foreach ((array)$path as $pathChoice) {
+                if (realpath($this->path()) === realpath($this->basePath($pathChoice))) {
+                    return $this->namespace = $namespace;
+                }
+            }
+        }
+
+        throw new RuntimeException('Unable to detect application namespace.');
+    }
+
+    /**
      * Get the path to the public / web directory.
      *
      * @return string
      */
-    public function publicPath(): string
+    public function publicPath($path = ''): string
     {
-        return dirname($this->basePath);
+        return dirname($this->basePath) . ($path != '' ? DIRECTORY_SEPARATOR . $path : '');
     }
 
 }
