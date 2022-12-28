@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             $parser = new Parser();
-            $object = $parser->parseFile(seCodePath('routes.yml'));
+            $object = $parser->parseFile(seCodePath('api-routes.yml'));
 
             $this->getFunction($object);
             Route::group(['prefix' => environmentId()], function () {
