@@ -41,9 +41,9 @@ if (!function_exists('testsPath')) {
      *
      * @return string
      */
-    function testsPath()
+    function testsPath(string $testPath): string
     {
-        return app()->testsPath();
+        return app()->testsPath($testPath);
     }
 }
 
