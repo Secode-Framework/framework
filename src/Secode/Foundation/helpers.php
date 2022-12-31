@@ -35,3 +35,15 @@ if (!function_exists('appUrl')) {
     }
 }
 
+if (!function_exists('testsPath')) {
+    /**
+     * Get the app url
+     *
+     * @return string
+     */
+    function testsPath()
+    {
+        return app()->testsPath();
+    }
+}
+

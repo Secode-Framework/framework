@@ -124,12 +124,19 @@ class Application extends ApplicationParent
     /**
      * Get the path to the public / web directory.
      *
+     * @param string $path
      * @return string
      */
-    public function publicPath($path = ''): string
+    public function publicPath(string $path = ''): string
     {
         return dirname($this->basePath) . ($path != '' ? DIRECTORY_SEPARATOR . $path : '');
     }
 
+
+    public function testsPath($path = ''):string
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'tests' .
+            ($path != '' ? DIRECTORY_SEPARATOR . $path : '');
+    }
 }
 
