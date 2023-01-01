@@ -4,7 +4,7 @@ namespace Secode\Pagination;
 
 class PaginationMapper
 {
-    public static function requestToPagination(): Pagination
+    public function requestToPagination(): Pagination
     {
         $sortCol = request('sortCol');
         $sortDir = request('sortDir');
@@ -31,7 +31,7 @@ class PaginationMapper
             ->setSort($sort);
     }
 
-    public static function camelToSnake($str)
+    private function camelToSnake($str)
     {
 
         $result = "";
