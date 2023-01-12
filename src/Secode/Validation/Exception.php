@@ -9,7 +9,7 @@ class Exception extends RuntimeException
 {
     protected $message;
     protected int $status = 400;
-    protected array $error;
+    protected array $error = [];
 
     public function __construct()
     {
