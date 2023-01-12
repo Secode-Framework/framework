@@ -117,7 +117,7 @@ class Pagination
         return [
             'lastPage' => $lastPage,
             'totalRows' => $totalRows,
-            'data' => $collector->get()
+            'data' => $collector->get()->all()
         ];
     }
 }
