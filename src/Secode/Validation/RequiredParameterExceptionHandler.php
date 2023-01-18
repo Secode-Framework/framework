@@ -50,7 +50,7 @@ abstract class RequiredParameterExceptionHandler extends Handler
 
     private static function isNotNullMandatoryField(mixed $notNullField): bool
     {
-        return $notNullField != null;
+        return $notNullField !== null && $notNullField !== "";
     }
 
     private static function validateThereAreErrors(array $error)
