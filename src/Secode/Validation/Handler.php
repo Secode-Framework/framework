@@ -44,7 +44,9 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            throw $e;
+            if (method_exists($e, 'render')) {
+                return $e->render();
+            }
         });
     }
 }
