@@ -8,4 +8,10 @@ class RequestFacilitator
     {
         return request();
     }
+
+    public function getAll()
+    {
+        $request = $this->getRequest();
+        return array_merge($request->request->all(),$request->allFiles());
+    }
 }
