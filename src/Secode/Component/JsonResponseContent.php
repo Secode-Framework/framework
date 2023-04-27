@@ -2,14 +2,12 @@
 
 namespace Secode\Component;
 
-use stdClass;
-
 class JsonResponseContent
 {
     private string $message;
     private bool $success;
-    private stdClass $error;
-    private stdClass $data;
+    private mixed $error;
+    private mixed $data;
     private bool $logout = false;
 
     /**
@@ -51,19 +49,19 @@ class JsonResponseContent
     }
 
     /**
-     * @return stdClass
+     * @return mixed
      */
-    public function getError(): stdClass
+    public function getError(): mixed
     {
         return $this->error;
     }
 
     /**
-     * @param stdClass $error
+     * @param mixed $error
      *
      * @return JsonResponseContent
      */
-    public function setError(stdClass $error): JsonResponseContent
+    public function setError(mixed $error): JsonResponseContent
     {
         $this->error = $error;
         return $this;
