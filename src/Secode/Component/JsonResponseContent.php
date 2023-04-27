@@ -89,19 +89,19 @@ class JsonResponseContent
     }
 
     /**
-     * @return stdClass
+     * @return mixed
      */
-    public function getData(): stdClass
+    public function getData(): mixed
     {
         return $this->data;
     }
 
     /**
-     * @param stdClass $data
+     * @param mixed $data
      *
      * @return JsonResponseContent
      */
-    public function setData(stdClass $data): JsonResponseContent
+    public function setData(mixed $data): JsonResponseContent
     {
         $this->data = $data;
         return $this;
