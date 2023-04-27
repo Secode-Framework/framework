@@ -8,7 +8,7 @@ use stdClass;
 class JsonResponseContentBuilder
 {
 
-    public static function buildErrorWithData(stdClass $error, string $message = ''): JsonResponseContent
+    public static function buildErrorWithData(mixed $error, string $message = ''): JsonResponseContent
     {
         return (new JsonResponseContent())
             ->setError($error)
@@ -24,7 +24,7 @@ class JsonResponseContentBuilder
             ->setSuccess(false);
     }
 
-    public static function buildSuccessWithData(stdClass $data, string $message = ''): JsonResponseContent
+    public static function buildSuccessWithData(mixed $data, string $message = ''): JsonResponseContent
     {
         return (new JsonResponseContent())
             ->setMessage($message)
